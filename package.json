@@ -1,0 +1,16 @@
+{
+  "name": "forma-browser-checks",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Optional browser verification; the application itself needs only Java",
+  "scripts": {
+    "test:e2e": "node tests/browser.cjs",
+    "test:persistence": "node tests/persistence.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

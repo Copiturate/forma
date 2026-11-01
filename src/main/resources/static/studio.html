@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Заявки — FORMA</title>
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script type="module" src="studio.js"></script>
+  </head>
+  <body class="utility-page">
+    <a class="skip-link" href="#main">Перейти к заявкам</a>
+    <header class="utility-header container">
+      <a href="/" class="brand">FORMA<span class="brand-dot">.</span></a>
+      <form action="/logout" method="post" id="logout-form">
+        <input type="hidden" name="_csrf" id="logout-csrf" /><button
+          class="button button-dark"
+          id="logout-button"
+          disabled
+        >
+          Выйти ↗
+        </button>
+      </form>
+    </header>
+    <main id="main" class="container studio-main">
+      <div class="studio-heading">
+        <div>
+          <p class="eyebrow muted">КАБИНЕТ БЮРО / ЗАЯВКИ</p>
+          <h1>От диалога<br />к <em>проекту.</em></h1>
+          <p>Бриф, ориентир по бюджету и следующий шаг — в одном месте.</p>
+        </div>
+        <span id="total-count" class="status-badge">Загрузка…</span>
+      </div>
+      <div class="studio-toolbar">
+        <label for="status-filter">Показать</label
+        ><select id="status-filter">
+          <option value="">Все заявки</option>
+          <option value="NEW">Новые</option>
+          <option value="REVIEWING">В работе</option>
+          <option value="CONTACTED">Связались</option>
+          <option value="CLOSED">Закрытые</option></select
+        ><button id="refresh" class="button button-dark">Обновить ↻</button>
+      </div>
+      <p
+        id="studio-status"
+        class="studio-status"
+        role="status"
+        aria-live="polite"
+      ></p>
+      <div id="inquiries" class="inquiry-grid" aria-label="Заявки"></div>
+      <nav class="pagination" aria-label="Страницы заявок">
+        <button class="button button-dark" id="prev" disabled>← Назад</button
+        ><span id="page-label">—</span
+        ><button class="button button-dark" id="next" disabled>Далее →</button>
+      </nav>
+      <noscript><p>Для просмотра заявок включите JavaScript.</p></noscript>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:forma-test;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+forma:
+  admin:
+    username: test-studio
+    password: test-password-only-123

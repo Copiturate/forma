@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Вход в бюро — FORMA</title>
+    <link rel="icon" href="favicon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="app.css" />
+    <script type="module" src="login.js"></script>
+  </head>
+  <body class="utility-page">
+    <header class="utility-header container">
+      <a href="/" class="brand">FORMA<span class="brand-dot">.</span></a
+      ><a href="/">На сайт ↗</a>
+    </header>
+    <main class="container">
+      <div class="login-card">
+        <p class="eyebrow muted">РАБОЧЕЕ ПРОСТРАНСТВО</p>
+        <h1>Кабинет<br /><em>бюро.</em></h1>
+        <form action="/login" method="post" id="login-form">
+          <input type="hidden" name="_csrf" id="login-csrf" />
+          <div class="field">
+            <label for="username">Логин</label
+            ><input
+              id="username"
+              name="username"
+              autocomplete="username"
+              required
+              maxlength="80"
+            />
+          </div>
+          <div class="field">
+            <label for="password">Пароль</label
+            ><input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+            />
+          </div>
+          <button class="button button-dark" id="login-button" disabled>
+            Войти <span aria-hidden="true">↗</span>
+          </button>
+          <p
+            id="login-status"
+            class="form-status"
+            role="status"
+            aria-live="polite"
+          ></p>
+        </form>
+        <p class="estimate-note">
+          Доступ для команды. Учётная запись настраивается владельцем приложения
+          через переменные окружения.
+        </p>
+        <noscript><p>Для входа включите JavaScript.</p></noscript>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: forma
+  datasource:
+    url: ${FORMA_DB_URL:jdbc:h2:file:./data/forma;DB_CLOSE_ON_EXIT=FALSE;WRITE_DELAY=0}
+    username: ${FORMA_DB_USERNAME:sa}
+    password: ${FORMA_DB_PASSWORD:}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  mvc:
+    problemdetails:
+      enabled: true
+server:
+  port: ${PORT:8080}
+  servlet:
+    session:
+      timeout: 30m
+      cookie:
+        http-only: true
+        same-site: strict
+        secure: ${FORMA_COOKIE_SECURE:false}
+  error:
+    include-message: never
+    include-stacktrace: never
+forma:
+  admin:
+    username: ${FORMA_ADMIN_USERNAME:studio}
+    password: ${FORMA_ADMIN_PASSWORD:}

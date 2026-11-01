@@ -1,0 +1,41 @@
+name: Build and verify
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - run: bash mvnw -B verify
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:persistence
+      - name: Browser smoke test
+        env:
+          FORMA_ADMIN_PASSWORD: ci-disposable-password-2026
+          FORMA_DB_URL: jdbc:h2:mem:browser;DB_CLOSE_DELAY=-1
+        run: |
+          java -jar target/forma-1.0.0.jar > /tmp/forma.log 2>&1 &
+          trap 'kill $! || true' EXIT
+          for i in $(seq 1 45); do
+            if curl -fsS http://localhost:8080/api/services > /dev/null; then break; fi
+            sleep 1
+          done
+          npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification
+          path: |
+            target/surefire-reports/
+            docs/screenshots/

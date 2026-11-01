@@ -1,0 +1,15 @@
+services:
+  forma:
+    build: .
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      FORMA_ADMIN_USERNAME: ${FORMA_ADMIN_USERNAME:-studio}
+      FORMA_ADMIN_PASSWORD: ${FORMA_ADMIN_PASSWORD:-}
+      FORMA_DB_PASSWORD: ${FORMA_DB_PASSWORD:-}
+      FORMA_COOKIE_SECURE: ${FORMA_COOKIE_SECURE:-false}
+    volumes:
+      - forma-data:/app/data
+    restart: unless-stopped
+volumes:
+  forma-data:

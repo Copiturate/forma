@@ -1,0 +1,40 @@
+@baseUrl = http://localhost:8080
+
+### 1. Сначала получите CSRF (REST Client сохраняет cookie)
+# @name csrf
+GET {{baseUrl}}/api/csrf
+
+### 2. Каталог
+GET {{baseUrl}}/api/services
+
+### 3. Расчёт
+POST {{baseUrl}}/api/estimates
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrf.response.body.$.token}}
+
+{"service":"INTERIOR","area":80}
+
+### 4. Сохранить бриф; повтор с этим UUID проверяет идемпотентность
+POST {{baseUrl}}/api/inquiries
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrf.response.body.$.token}}
+
+{
+  "requestId":"cd49bb1b-884a-45e7-beb7-23fe3afbc2b2",
+  "name":"Анна",
+  "email":"anna@example.com",
+  "service":"INTERIOR",
+  "area":80,
+  "message":"Светлый интерьер и рабочее место.",
+  "consent":true
+}
+
+### 5. Проверка валидации: ожидается 400
+POST {{baseUrl}}/api/estimates
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrf.response.body.$.token}}
+
+{"service":"INTERIOR","area":1}
+
+### 6. Без входа ожидается 401; с авторизованной cookie — список
+GET {{baseUrl}}/api/admin/inquiries?page=0&status=NEW
