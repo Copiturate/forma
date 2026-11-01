@@ -36,7 +36,7 @@
 - Java-тесты в `src/test/java`, `tests/browser.cjs`, `tests/persistence.cjs`, `package.json` и lock-файл.
 - `README.md`, документация в `docs/`, скриншоты, CI, Docker/Compose, `.gitignore`, `.gitattributes`, `.dockerignore`, `.env.example`.
 
-GitHub-публикация и выбор лицензии оставлены автору. Ни аккаунты, ни внешние сервисы для локального запуска не требуются.
+Проект опубликован в [Copiturate/forma](https://github.com/Copiturate/forma). Лицензию на исходный код выбирает автор. Ни аккаунты, ни внешние сервисы для локального запуска не требуются.
 
 ## Что рассказать на собеседовании
 
